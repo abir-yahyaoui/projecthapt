@@ -1,10 +1,10 @@
-package com.horizon.demo;
+package com.horizon.hapt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class HaptApplicationTests {
 
 	@Test
 	void contextLoads() {
