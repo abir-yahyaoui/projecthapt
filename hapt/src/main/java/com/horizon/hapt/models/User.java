@@ -1,60 +1,61 @@
 package com.horizon.hapt.models;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-public class User {
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+
+@Entity
+@Table(schema = "haptdb",uniqueConstraints =@UniqueConstraint(columnNames = "mail"))
+public class User implements Serializable /**pour incrementation  */ {
+    private static final long serialVersionUID=1l ; /**incrementation */
+    @Column
     private long id ;
+    @Column
     private String mail;
+    @Column
     private String password ;
+    @Column
     private String nom;
+    @Column
     private String prenom;
+    @Column
     private String adresse;
+    @Column
     private int tel;
+    @Column
     private  Date dateN ;
+    @Column
     private int cin;
+    @Column
     private String niveau;
-    private List <Role> listRole;
-    private List <Etudiant> listEtudiant ;
-    private List<Formateur> listFormateur ;
-    private List<Entreprise> listEntreprise ;
+    @JoinColumn(name = "role",referencedColumnName = "id")
+    @ManyToOne
+    private Role role;
+    
 
-    public User(String mail, String password, String nom, String prenom, String adresse, int tel, Date dateN, int cin,
-            String niveau,long id) {
-        this.setMail(mail);
-        this.setPassword(password);
-        this.setNom(nom);
-        this.setPrenom(prenom);
-        this.setAdresse(adresse);
-        this.setTel(tel);
-        this.setDateN(dateN);
-        this.setCin(cin);
-        this.setNiveau(niveau);
-        this.setId(id);
+    public User(long id, String mail, String password, String nom, String prenom, String adresse, int tel, Date dateN,
+            int cin, String niveau, Role role) {
+        this.id = id;
+        this.mail = mail;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.tel = tel;
+        this.dateN = dateN;
+        this.cin = cin;
+        this.niveau = niveau;
+        this.role = role;
     }
-    public List<Entreprise> getListEntreprise() {
-        return listEntreprise;
-    }
-    public void setListEntreprise(List<Entreprise> listEntreprise) {
-        this.listEntreprise = listEntreprise;
-    }
-    public List<Formateur> getListFormateur() {
-        return listFormateur;
-    }
-    public void setListFormateur(List<Formateur> listFormateur) {
-        this.listFormateur = listFormateur;
-    }
-    public List <Etudiant> getListEtudiant() {
-        return listEtudiant;
-    }
-    public void setListEtudiant(List <Etudiant> listEtudiant) {
-        this.listEtudiant = listEtudiant;
-    }
-    public List <Role> getListRole() {
-        return listRole;
-    }
-    public void setListRole(List <Role> listRole) {
-        this.listRole = listRole;
-    }
+    
+    
     public long getId() {
         return id;
     }
@@ -115,6 +116,20 @@ public class User {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+    
+
+
     
 
    
